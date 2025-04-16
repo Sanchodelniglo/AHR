@@ -244,31 +244,9 @@ nav a:hover::after {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.about-image::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  width: 100px;
-  height: 100px;
-  border-top: 4px solid var(--color-wood-light);
-  border-left: 4px solid var(--color-wood-light);
-  z-index: -1;
-}
-
-.about-image::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  width: 100px;
-  height: 100px;
-  border-bottom: 4px solid var(--color-wood-light);
-  border-right: 4px solid var(--color-wood-light);
-  z-index: -1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXQxMXprNDM4dGhmZGgwcHF0bmthNnJwZTh0bTVnZWRtYW5qeG1odiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZTans30ONaaIM/giphy.gif') center/cover no-repeat;
+  height: 350px;
 }
 
 /* Services Section */
