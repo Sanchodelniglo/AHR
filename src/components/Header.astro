@@ -1,0 +1,208 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../images/logo.png'
+import 'hamburgers/dist/hamburgers.min.css';
+---
+
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <a href="/">
+        <Image
+          src={logo}
+          alt="logo"
+          width={logo.width }
+          height={logo.height }
+          quality={100}
+        />
+      </a>
+    </div>
+
+    <button class="hamburger hamburger--collapse" type="button" aria-label="Menu" aria-controls="navigation">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+
+    <nav id="navigation" class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="/services" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* Header Styles */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .logo a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .logo img {
+    height: 39px;
+    width: 85px;
+  }
+
+  .hamburger-inner, .hamburger-inner::after, .hamburger-inner::before {
+    background-color: var(--color-wood);
+    height: 3px;
+    width: 35px;
+  }
+
+  .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner::after, .hamburger.is-active .hamburger-inner::before {
+  background-color: var(--color-wood);
+}
+
+  /* Navigation Styles */
+  .nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    margin-left: 2rem;
+  }
+
+  .nav-link {
+    color: var(--color-wood);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-wood-dark);
+  }
+
+  /* Hamburger Button - leverages imported CSS */
+  .hamburger {
+    display: none;
+    z-index: 1100;
+  }
+
+  /* Media Queries for Responsive Design */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: inline-block;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      max-width: 300px;
+      height: 100vh;
+      background-color: #ffffff;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 1050;
+      padding-top: 80px;
+    }
+
+    .nav.is-active {
+      right: 0;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      padding: 0 2rem;
+    }
+
+    .nav-item {
+      margin: 0;
+      padding: 1rem 0;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .nav-item:last-child {
+      border-bottom: none;
+    }
+  }
+</style>
+
+<script>
+  // Wait for the DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.nav');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    // Toggle menu on hamburger click
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('is-active');
+      nav.classList.toggle('is-active');
+
+      // Toggle aria-expanded attribute for accessibility
+      const isOpen = hamburger.classList.contains('is-active');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menu when clicking on a nav link (for mobile)
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (hamburger) {
+          hamburger.classList.remove('is-active');
+        }
+        if (nav) {
+          nav.classList.remove('is-active');
+        }
+        if (hamburger) {
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Close menu when clicking outside of it
+    document.addEventListener('click', (event) => {
+      const isClickInsideNav = nav && nav.contains(event.target as Node);
+      const isHamburgerClick = hamburger && hamburger.contains(event.target as Node);
+
+      if (nav && !isClickInsideNav && !isHamburgerClick && nav.classList.contains('is-active')) {
+        hamburger.classList.remove('is-active');
+        nav.classList.remove('is-active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && nav.classList.contains('is-active')) {
+        hamburger.classList.remove('is-active');
+        nav.classList.remove('is-active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>

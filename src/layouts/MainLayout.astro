@@ -1,0 +1,139 @@
+---
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="robots"
+      content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+    />
+    <link rel="canonical" href="https://alienorhabitatrenov.fr/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://alienorhabitatrenov.fr/" />
+    <meta property="og:site_name" content="Alienor Habitat Renov" />
+    <meta property="og:updated_time" content="2024-11-12T17:07:05+01:00" />
+    <meta
+      property="og:image"
+      content="https://alienorhabitatrenov.fr/wp-content/uploads/2024/01/ALIENORHABITATRENOV_LOGO_FINAL_VECTO.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://alienorhabitatrenov.fr/wp-content/uploads/2024/01/ALIENORHABITATRENOV_LOGO_FINAL_VECTO.png"
+    />
+    <meta property="og:image:width" content="1700" />
+    <meta property="og:image:height" content="792" />
+    <meta property="og:image:alt" content="logo Alienor Habitat Renov" />
+    <meta property="og:image:type" content="image/png" />
+    <meta
+      property="article:published_time"
+      content="2024-01-05T04:35:04+01:00"
+    />
+    <meta
+      property="article:modified_time"
+      content="2024-11-12T17:07:05+01:00"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta
+      name="twitter:image"
+      content="https://alienorhabitatrenov.fr/wp-content/uploads/2024/01/ALIENORHABITATRENOV_LOGO_FINAL_VECTO.png"
+    />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Thomas" />
+    <meta name="twitter:label2" content="Time to read" />
+    <meta name="twitter:data2" content="30 minutes" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Aliénor Habitat Rénov" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      import "../scripts/main.js";
+    </script>
+  </body>
+</html>
+
+<style>
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --color-wood: #8b4513;
+    --color-wood-light: #cd853f;
+    --color-wood-dark: #62300d;
+    --color-cream: #fffdd0;
+    --color-cream-dark: #d3b9a1;
+    --color-dark: #1a1a1a;
+    --font-main: "Helvetica Neue", sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-main);
+    line-height: 1.6;
+    color: var(--color-wood-dark);
+    overflow-x: hidden;
+    background-color: #fafafa;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  html :global(a) {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button,
+  .btn {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
+</style>
