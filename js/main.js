@@ -55,12 +55,12 @@ filterButtons.forEach(button => {
 // Testimonial slider
 const testimonials = [
   {
-    content: "Aliénor Habitat Rénov' a réalisé notre terrasse en bois exotique, un travail remarquable avec un souci du détail impressionnant. Le résultat dépasse nos attentes et s'intègre parfaitement à notre jardin.",
+    content: "Élégance Bois a réalisé notre terrasse en bois exotique, un travail remarquable avec un souci du détail impressionnant. Le résultat dépasse nos attentes et s'intègre parfaitement à notre jardin.",
     author: "Famille Dupont",
     location: "Pessac, Gironde"
   },
   {
-    content: "La rénovation de notre charpente était un projet ambitieux, mais l'équipe d'Aliénor Habitat Rénov' a relevé le défi avec brio. Leur expertise et leur professionnalisme nous ont convaincus dès le premier contact.",
+    content: "La rénovation de notre charpente était un projet ambitieux, mais l'équipe d'Élégance Bois a relevé le défi avec brio. Leur expertise et leur professionnalisme nous ont convaincus dès le premier contact.",
     author: "Jean-Pierre Martin",
     location: "Saint-Émilion, Gironde"
   },

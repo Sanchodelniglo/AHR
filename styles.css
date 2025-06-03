@@ -14,6 +14,7 @@
   --color-cream: #FFFDD0;
   --color-cream-dark: #D3B9A1;
   --color-dark: #1A1A1A;
+  --color-olive: #6a6d59;
   --font-main: 'Helvetica Neue', sans-serif;
 }
 
@@ -124,8 +125,9 @@ nav a:hover::after {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 8rem;
+  width: 3rem;
   height: 1.5rem;
+  z-index: 1000;
 }
 
 .menu-toggle span {
@@ -152,7 +154,7 @@ nav a:hover::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)), url('img/header.jpg') center/cover no-repeat;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)), url('img/header.png') center/cover no-repeat;
   z-index: -1;
 }
 
@@ -178,8 +180,8 @@ nav a:hover::after {
 .btn-primary {
   display: inline-block;
   padding: 1rem 2rem;
-  background-color: var(--color-wood-light);
-  color: whitesmoke;
+  background-color: var(--color-olive);
+  color: var(--color-wood-light);
   font-weight: 600;
   border-radius: 4px;
   transition: all 0.3s ease;
@@ -289,19 +291,19 @@ nav a:hover::after {
 }
 
 .pergola {
-  background: url('img/pergola.jpg') center/cover no-repeat;
+  background: url('img/pergola.png') center/cover no-repeat;
 }
 
 .deck {
-  background: url('img/deck.jpg') center/cover no-repeat;
+  background: url('img/deck.png') center/cover no-repeat;
 }
 
 .extension {
-  background: url('img/extension.jpg') center/cover no-repeat;
+  background: url('img/extension.png') center/cover no-repeat;
 }
 
 .extension-2 {
-  background: url('img/extension-2.jpg') center/cover no-repeat;
+  background: url('img/extension-2.png') center/cover no-repeat;
 }
 
 .roof {
@@ -733,7 +735,7 @@ footer {
   }
 
   .hero-bg {
-    background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)), url('img/extension-2.jpg') center/cover no-repeat;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)), url('img/extension-2.png') center/cover no-repeat;
   }
 
   .btn-primary {
