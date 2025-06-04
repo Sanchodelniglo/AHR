@@ -56,17 +56,17 @@ filterButtons.forEach(button => {
 const testimonials = [
   {
     content: "Élégance Bois a réalisé notre terrasse en bois exotique, un travail remarquable avec un souci du détail impressionnant. Le résultat dépasse nos attentes et s'intègre parfaitement à notre jardin.",
-    author: "Famille Dupont",
+    author: "Famille Lecomte",
     location: "Pessac, Gironde"
   },
   {
-    content: "La rénovation de notre charpente était un projet ambitieux, mais l'équipe d'Élégance Bois a relevé le défi avec brio. Leur expertise et leur professionnalisme nous ont convaincus dès le premier contact.",
-    author: "Jean-Pierre Martin",
+    content: "La rénovation de notre cloture était un projet ambitieux, mais l'équipe d'Élégance Bois a relevé le défi avec brio. Leur expertise et leur professionnalisme nous ont convaincus dès le premier contact.",
+    author: "Jean-Pierre Brun",
     location: "Saint-Émilion, Gironde"
   },
   {
     content: "Nous recommandons vivement cette entreprise pour la qualité de leur travail et leur écoute attentive. Notre pergola est devenue le point central de notre jardin et fait l'admiration de tous nos invités.",
-    author: "Sophie Legrand",
+    author: "Sophie Lopez",
     location: "Bordeaux, Gironde"
   }
 ];
@@ -109,19 +109,49 @@ setInterval(() => {
 // Form submission
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Simple validation
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const message = document.getElementById('message').value;
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const service = document.getElementById('service').value.trim();
 
-  if (name && email && phone && message) {
-    // Here you would normally send the data to a server
-    alert('Merci pour votre message! Nous vous contacterons très rapidement.');
-    contactForm.reset();
+  if (name && email && phone && message && service) {
+    const formData = new FormData(contactForm);
+    const button = contactForm.querySelector('button[type="submit"]');
+    button.innerHTML = '<span class="loader"></span>';
+
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    // Usage inside an async function:
+    await sleep(4000); // pauses execution for 4 seconds
+    window.fetch = async () => {
+      return {
+        ok: true,
+        json: async () => ({ error: "Simulated failure" })
+      };
+    };
+
+    try {
+      const response = await fetch('https://formspree.io/f/xrbkbkeb', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        contactForm.reset();
+        contactForm.innerHTML = "✅ Merci pour votre message ! Nous vous contacterons très rapidement.";
+      } else {
+        contactForm.innerHTML = '❌ Une erreur est survenue lors de l’envoi. Veuillez réessayer plus tard.';
+      }
+    } catch (error) {
+      contactForm.innerHTML = '❌ Une erreur réseau est survenue. Veuillez vérifier votre connexion.';
+    }
   } else {
     alert('Veuillez remplir tous les champs obligatoires.');
   }
