@@ -38,8 +38,8 @@
     <!-- Header -->
     <header>
       <div class="header-inner">
-        <a href="#" class="logo">
-          <img src="img/logo.png" alt="Logo Élégance Bois">
+        <a href="/" class="logo">
+          <img src="img/logo-elegance-bois.png" alt="Logo Élégance Bois">
         </a>
 
         <button class="menu-toggle">
@@ -56,6 +56,30 @@
             <li><a href="#portfolio">Réalisations</a></li>
             <li><a href="#temoignages">Témoignages</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li>
+              <a href="https://www.facebook.com/p/GA-SOLS-100057616414130/" class="facebook-icon-nav" target="_blank">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/elegance.bois.aquitaine/" class="insta-icon-nav" target="_blank">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2C22,19.4 19.4,22 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8C2,4.6 4.6,2 7.8,2M7.6,4C5.61,4 4,5.61 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4C18.39,20 20,18.39 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5C17.94,5.5 18.5,6.06 18.5,6.75C18.5,7.44 17.94,8 17.25,8C16.56,8 16,7.44 16,6.75C16,6.06 16.56,5.5 17.25,5.5M12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9Z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="linkedin-icon" style="display:none;">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z" />
+                </svg>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -64,14 +88,16 @@
     <!-- Hero Section -->
     <section class="hero" id="accueil">
       <div class="hero-bg"></div>
-      <div class="hero-content">
-        <img src="img/logo.png" height="200">
-        <br>
-        <h2>Le bois sur mesure, l’élégance accessible.</h2>
-        <br>
-        <p>Spécialiste de la clôture et des terrasses sur mesure en Gironde.
-          Des réalisations uniques pour sublimer votre espace.</p>
-        <a href="#contact" class="btn-primary">Contactez-nous</a>
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <img src="img/logo-elegance-bois.png" height="150" alt="Logo Élégance Bois">
+          <br>
+          <h2>Le bois sur mesure, l’élégance accessible.</h2>
+          <br>
+          <p>Spécialiste de la clôture et des terrasses sur mesure en Gironde.
+            Des réalisations uniques pour sublimer votre espace.</p>
+          <a href="#contact" class="btn-primary">Contactez-nous</a>
+        </div>
       </div>
       <div class="scroll-indicator">
         <svg viewBox="0 0 24 24">
@@ -156,6 +182,12 @@
           </div>
         </div>
       </div>
+      <div class="services-cta">
+        <h2>Vous avez un projet en tête ?</h2>
+        <p>Nous serions ravis de vous accompagner dans sa réalisation. N'hésitez
+          pas à nous contacter pour discuter de vos besoins et obtenir un devis
+          personnalisé.</p>
+      <a href="#contact" class="btn-primary">Contactez-nous</a>
     </section>
 
     <!-- Portfolio Section -->
@@ -163,7 +195,7 @@
       <h2 class="section-title">Nos réalisations</h2>
       <div class="portfolio-filter">
         <button class="filter-btn active" data-filter="all">Tous</button>
-        <button class="filter-btn" data-filter="cloture">Charpentes</button>
+        <button class="filter-btn" data-filter="cloture">Clôtures</button>
         <button class="filter-btn" data-filter="terrasse">Terrasses</button>
         <button class="filter-btn" data-filter="pergola">Pergolas</button>
         <button class="filter-btn" data-filter="extension">Extensions</button>
@@ -249,40 +281,6 @@
     <section class="contact" id="contact">
       <h2 class="section-title">Contactez-nous</h2>
       <div class="contact-container">
-        <div class="contact-info">
-          <h3>Parlons de votre projet</h3>
-          <p>Vous avez un projet en tête? Nous serions ravis de vous accompagner
-            dans sa réalisation. N'hésitez pas à nous contacter pour discuter de
-            vos besoins et obtenir un devis personnalisé.</p>
-          <div class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24">
-              <path
-                d="M12,2C8.13,2,5,5.13,5,9c0,5.25,7,13,7,13s7-7.75,7-13C19,5.13,15.87,2,12,2z M12,11.5c-1.38,0-2.5-1.12-2.5-2.5s1.12-2.5,2.5-2.5s2.5,1.12,2.5,2.5S13.38,11.5,12,11.5z" />
-            </svg>
-            <span>228 rue des Tamaris, 33127 Saint Saint-Jean d'Illac</span>
-          </div>
-          <div class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24">
-              <path
-                d="M6.62,10.79C8.06,13.62,10.38,15.94,13.21,17.38L15.41,15.18C15.69,14.9,16.08,14.82,16.43,14.93C17.55,15.3,18.75,15.5,20,15.5C20.55,15.5,21,15.95,21,16.5V20C21,20.55,20.55,21,20,21C10.61,21,3,13.39,3,4C3,3.45,3.45,3,4,3H7.5C8.05,3,8.5,3.45,8.5,4C8.5,5.25,8.7,6.45,9.07,7.57C9.18,7.92,9.1,8.31,8.82,8.59L6.62,10.79Z" />
-            </svg>
-            <span>06 22 73 49 08</span>
-          </div>
-          <div class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24">
-              <path
-                d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4,2,4.89,2,6V18C2,19.1,2.9,20,4,20H20C21.1,20,22,19.1,22,18V6C22,4.89,21.1,4,20,4Z" />
-            </svg>
-            <span>contact@elegance-bois.fr</span>
-          </div>
-          <div class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24">
-              <path
-                d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
-            </svg>
-            <span>Lun-Ven: 8h-18h | Sam: 9h-12h</span>
-          </div>
-        </div>
         <div class="contact-form">
           <form id="contactForm" action="https://formspree.io/f/xrbkbkeb"
             method="POST">
@@ -321,6 +319,40 @@
             </button>
           </form>
         </div>
+        <div class="contact-info">
+          <h3>Parlons de votre projet</h3>
+          <p>Vous avez un projet en tête? Nous serions ravis de vous accompagner
+            dans sa réalisation. N'hésitez pas à nous contacter pour discuter de
+            vos besoins et obtenir un devis personnalisé.</p>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path
+                d="M12,2C8.13,2,5,5.13,5,9c0,5.25,7,13,7,13s7-7.75,7-13C19,5.13,15.87,2,12,2z M12,11.5c-1.38,0-2.5-1.12-2.5-2.5s1.12-2.5,2.5-2.5s2.5,1.12,2.5,2.5S13.38,11.5,12,11.5z" />
+            </svg>
+            <span>228 rue des Tamaris, 33127 Saint Saint-Jean d'Illac</span>
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path
+                d="M6.62,10.79C8.06,13.62,10.38,15.94,13.21,17.38L15.41,15.18C15.69,14.9,16.08,14.82,16.43,14.93C17.55,15.3,18.75,15.5,20,15.5C20.55,15.5,21,15.95,21,16.5V20C21,20.55,20.55,21,20,21C10.61,21,3,13.39,3,4C3,3.45,3.45,3,4,3H7.5C8.05,3,8.5,3.45,8.5,4C8.5,5.25,8.7,6.45,9.07,7.57C9.18,7.92,9.1,8.31,8.82,8.59L6.62,10.79Z" />
+            </svg>
+            <span>06 22 73 49 08</span>
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path
+                d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4,2,4.89,2,6V18C2,19.1,2.9,20,4,20H20C21.1,20,22,19.1,22,18V6C22,4.89,21.1,4,20,4Z" />
+            </svg>
+            <span>contact@elegance-bois.fr</span>
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24">
+              <path
+                d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+            <span>Lun-Ven: 8h-18h | Sam: 9h-12h</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -333,25 +365,19 @@
             <p>L'excellence du travail du bois en Gironde. Spécialiste de la
               cloture et des terrasses sur mesure depuis plus de 15 ans.</p>
             <div class="social-links">
-              <a href="#" class="social-icon">
+              <a href="https://www.facebook.com/p/GA-SOLS-100057616414130/" class="facebook-icon" target="_blank">
                 <svg viewBox="0 0 24 24">
                   <path
                     d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
                 </svg>
               </a>
-              <a href="#" class="social-icon">
+              <a href="https://www.instagram.com/elegance.bois.aquitaine/" class="insta-icon" target="_blank">
                 <svg viewBox="0 0 24 24">
                   <path
                     d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2C22,19.4 19.4,22 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8C2,4.6 4.6,2 7.8,2M7.6,4C5.61,4 4,5.61 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4C18.39,20 20,18.39 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5C17.94,5.5 18.5,6.06 18.5,6.75C18.5,7.44 17.94,8 17.25,8C16.56,8 16,7.44 16,6.75C16,6.06 16.56,5.5 17.25,5.5M12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7M12,9C10.34,9 9,10.34 9,12C9,13.66 10.34,15 12,15C13.66,15 15,13.66 15,12C15,10.34 13.66,9 12,9Z" />
                 </svg>
               </a>
-              <a href="#" class="social-icon">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" />
-                </svg>
-              </a>
-              <a href="#" class="social-icon">
+              <a href="#" class="linkedin-icon" style="display:none;">
                 <svg viewBox="0 0 24 24">
                   <path
                     d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z" />
@@ -373,12 +399,10 @@
           <div class="footer-column">
             <h4>Services</h4>
             <ul class="footer-links">
-              <li><a href="#">Clôture traditionnelle</a></li>
-              <li><a href="#">Terrasses en bois</a></li>
-              <li><a href="#">Pergolas & aménagements</a></li>
-              <li><a href="#">Extensions bois</a></li>
-              <li><a href="#">Bardage</a></li>
-              <li><a href="#">Ossature bois</a></li>
+              <li><a href="/#services">Clôture traditionnelle</a></li>
+              <li><a href="/#services">Terrasses en bois</a></li>
+              <li><a href="/#services">Pergolas & aménagements</a></li>
+              <li><a href="/#services">Extensions bois</a></li>
             </ul>
           </div>
           <div class="footer-column">

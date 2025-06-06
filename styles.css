@@ -61,7 +61,8 @@ header {
   z-index: 1000;
   transition: 0.3s ease-in-out;
   color: rgba(255, 255, 255, 0.95);
-  opacity: 0;;
+  opacity: 0;
+  height: 65px;
 }
 
 header.scrolled {
@@ -78,15 +79,17 @@ header.scrolled {
   padding: 1rem 5%;
   max-width: 1400px;
   margin: 0 auto;
+  height: 65px
 }
 
 .logo {
   display: flex;
   align-items: center;
+  height: inherit;
 }
 
 .logo img {
-  width: 20%;
+  height: 95%;
   border: 2px solid rgba(255, 255, 255, 0.95);
   background-color: rgba(255, 255, 255, 0.95);
 }
@@ -131,7 +134,7 @@ nav a:hover::after {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 3rem;
+  width: 2rem;
   height: 1.5rem;
   z-index: 1000;
 }
@@ -141,6 +144,19 @@ nav a:hover::after {
   height: 3px;
   background-color: var(--color-wood-light);
   transition: all 0.3s ease;
+}
+
+/* Hamburger to X animation */
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* Hero Section */
@@ -164,13 +180,19 @@ nav a:hover::after {
   z-index: -1;
 }
 
+.hero-overlay {
+  padding: 2rem 2rem;
+  background-color: #0000001a;
+  backdrop-filter: blur(2px);
+}
+
 .hero-content {
   text-align: center;
   max-width: 800px;
   padding: 2rem 2rem;
   animation: fadeIn 1.5s ease-out;
   backdrop-filter: blur(3px);
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .hero h1 {
@@ -193,7 +215,7 @@ nav a:hover::after {
   display: inline-block;
   padding: 1rem 2rem;
   background-color: var(--color-olive);
-  color: var(--color-cream);
+  color: white;
   font-weight: 600;
   border-radius: 4px;
   transition: all 0.3s ease;
@@ -202,7 +224,7 @@ nav a:hover::after {
 .btn-primary:hover {
   background-color: var(--color-wood);
   color: white;
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .scroll-indicator {
@@ -332,6 +354,23 @@ nav a:hover::after {
   color: var(--color-wood);
 }
 
+.services-cta {
+  text-align: center;
+  margin-top: 6rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 60%;
+}
+
+.services-cta h2 {
+  margin-bottom: 1rem;
+}
+
+.services-cta p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
 /* Portfolio */
 .portfolio {
   padding: 6rem 5%;
@@ -349,15 +388,15 @@ nav a:hover::after {
 
 .filter-btn {
   padding: 0.5rem 1.5rem;
-  border: 1px solid var(--color-wood-light);
   border-radius: 30px;
-  font-weight: 500;
+  font-weight: bold;
   transition: all 0.3s;
+  color: var(--color-wood-dark)
 }
 
 .filter-btn.active,
 .filter-btn:hover {
-  background-color: var(--color-wood);
+  background-color: var(--color-olive);
   color: white;
 }
 
@@ -578,10 +617,11 @@ nav a:hover::after {
 
 @keyframes rotation {
   0% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -639,7 +679,12 @@ footer {
   margin-top: 1.5rem;
 }
 
-.social-icon {
+.facebook-icon,
+.insta-icon,
+.linkedin-icon,
+.facebook-icon-nav,
+.insta-icon-nav,
+.linkedin-icon-nav {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -650,13 +695,46 @@ footer {
   transition: background-color 0.3s;
 }
 
-.social-icon:hover {
+.facebook-icon-nav,
+.insta-icon-nav,
+.linkedin-icon-nav {
+  background-color: var(--color-wood-dark);
+  width: 30px;
+  height: 30px;
+  text-decoration: none;
+}
+
+.facebook-icon-nav::after,
+.insta-icon-nav::after,
+.linkedin-icon-nav::after {
+  display: none
+}
+
+.facebook-icon-nav:hover,
+.insta-icon-nav:hover,
+.linkedin-icon-nav:hover {
   background-color: var(--color-wood-light);
 }
 
-.social-icon svg {
+.facebook-icon-nav:hover svg,
+.insta-icon-nav:hover  svg,
+.linkedin-icon-nav:hover  svg {
+  fill: var(--color-wood-dark);
+}
+
+.facebook-icon svg,
+.insta-icon svg,
+.linkedin-icon svg {
   width: 20px;
   height: 20px;
+  fill: white;
+}
+
+.facebook-icon-nav svg,
+.insta-icon-nav svg,
+.linkedin-icon-nav svg {
+  width: 24px;
+  height: 24px;
   fill: white;
 }
 
@@ -758,6 +836,10 @@ footer {
 
   .section-title {
     font-size: 2rem;
+  }
+
+  .services-cta {
+    max-width: 100%;
   }
 }
 

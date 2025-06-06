@@ -4,6 +4,7 @@ const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('nav');
 
 menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
   nav.classList.toggle('active');
   document.body.classList.toggle('no-scroll');
 });
@@ -201,8 +202,8 @@ const animateOnScroll = () => {
 // Apply initial styles for animation
 document.querySelectorAll('section:not(.hero)').forEach(section => {
   section.style.opacity = '0';
-  section.style.transform = 'translateY(20px)';
-  section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  section.style.transform = 'translateY(50px)';
+  section.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
 });
 
 // Run on load and scroll
