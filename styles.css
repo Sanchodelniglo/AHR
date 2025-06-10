@@ -176,7 +176,7 @@ nav a:hover::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1)), url('img/header.jpg') center/cover no-repeat;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1)), url('img/header.webp') center/cover no-repeat;
   z-index: -1;
 }
 
@@ -321,27 +321,27 @@ nav a:hover::after {
 }
 
 .carpenter {
-  background: url('img/carpenter.png') center/cover no-repeat;
+  background: url('img/carpenter.webp') center/cover no-repeat;
 }
 
 .pergola {
-  background: url('img/pergola.png') center/cover no-repeat;
+  background: url('img/pergola.webp') center/cover no-repeat;
 }
 
 .deck {
-  background: url('img/deck.png') center/cover no-repeat;
+  background: url('img/deck.webp') center/cover no-repeat;
 }
 
 .extension {
-  background: url('img/extension.png') center/cover no-repeat;
+  background: url('img/extension.webp') center/cover no-repeat;
 }
 
 .extension-2 {
-  background: url('img/extension-2.png') center/cover no-repeat;
+  background: url('img/extension-2.webp') center/cover no-repeat;
 }
 
 .pergola {
-  background: url('img/pergola.png') center/cover no-repeat;
+  background: url('img/pergola.webp') center/cover no-repeat;
 }
 
 .service-content {
@@ -849,7 +849,7 @@ footer {
   }
 
   .hero-bg {
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)), url('img/deck.png') center/cover no-repeat;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)), url('img/deck.webp') center/cover no-repeat;
   }
 
   .btn-primary {
