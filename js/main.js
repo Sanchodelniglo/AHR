@@ -20,38 +20,342 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Portfolio filter
-const filterButtons = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
+// services-data.json
+const servicesData = {
+  services: [
+    {
+      id: 'cloture-bois',
+      title: 'Clôture Bois',
+      description: 'Conception et réalisation de clôtures en bois sur mesure, combinant savoir-faire traditionnel et solutions modernes pour des installations durables et esthétiques.',
+      image: 'img/carpenter.webp',
+      category: 'cloture'
+    },
+    {
+      id: 'terrasses-bois',
+      title: 'Terrasses en bois',
+      description: 'Création de terrasses uniques adaptées à votre espace extérieur, avec un large choix d\'essences de bois pour un résultat à la fois durable et élégant.',
+      image: 'img/deck.webp',
+      category: 'terrasse'
+    },
+    {
+      id: 'extensions-bois',
+      title: 'Extensions bois',
+      description: 'Agrandissement de votre espace de vie avec des extensions en ossature bois, alliant performance thermique et intégration parfaite à votre habitat existant.',
+      image: 'img/extension.webp',
+      category: 'extension'
+    },
+    {
+      id: 'pergolas',
+      title: 'Pergolas',
+      description: 'Pergolas sur mesure pour créer des espaces extérieurs élégants et ombragés. Nos conceptions allient esthétisme, durabilité et adaptation parfaite à votre cadre de vie.',
+      image: 'img/pergola.webp',
+      category: 'pergola'
+    }
+  ],
+  portfolio: [
+    {
+      id: 'cloture-saint-emilion',
+      title: 'Clôture traditionnelle',
+      location: 'Saint-Émilion',
+      image: 'img/carpenter.webp',
+      category: 'cloture'
+    },
+    {
+      id: 'terrasse-bordeaux',
+      title: 'Terrasse en ipé',
+      location: 'Bordeaux Centre',
+      image: 'img/deck.webp',
+      category: 'terrasse'
+    },
+    {
+      id: 'pergola-arcachon',
+      title: 'Pergola contemporaine',
+      location: 'Arcachon',
+      image: 'img/pergola.webp',
+      category: 'pergola'
+    },
+    {
+      id: 'extension-pessac',
+      title: 'Extension maison d\'architecte',
+      location: 'Pessac',
+      image: 'img/extension.webp',
+      category: 'extension'
+    },
+    {
+      id: 'extension-pessac-2',
+      title: 'Extension maison d\'architecte',
+      location: 'Pessac',
+      image: 'img/extension-2.webp',
+      category: 'extension'
+    },
+    {
+      id: 'cloture-saint-estephe',
+      title: 'Rénovation château',
+      location: 'Saint-Estèphe',
+      image: 'img/carpenter.webp',
+      category: 'cloture'
+    },
+    {
+      id: 'terrasse-blanquefort',
+      title: 'Terrasse autour de piscine',
+      location: 'Blanquefort',
+      image: 'img/deck.webp',
+      category: 'terrasse'
+    }
+  ],
+  filters: [
+    { id: 'all', label: 'Tous' },
+    { id: 'cloture', label: 'Clôtures' },
+    { id: 'terrasse', label: 'Terrasses' },
+    { id: 'pergola', label: 'Pergolas' },
+    { id: 'extension', label: 'Extensions' }
+  ]
+};
 
-filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    // Remove active class from all buttons
-    filterButtons.forEach(btn => btn.classList.remove('active'));
+// Dynamic rendering functions
+class DynamicContent {
+  constructor(data) {
+    this.data = data;
+  }
 
-    // Add active class to clicked button
-    button.classList.add('active');
+  // Render services section
+  renderServices() {
+    const servicesGrid = document.querySelector('.services-grid');
+    if (!servicesGrid) return;
 
-    const filter = button.getAttribute('data-filter');
+    servicesGrid.innerHTML = '';
 
-    // Filter portfolio items
-    portfolioItems.forEach(item => {
-      const category = item.getAttribute('data-category');
+    this.data.services.forEach(service => {
+      const serviceCard = document.createElement('div');
+      serviceCard.className = 'service-card';
+      serviceCard.innerHTML = `
+        <div class="service-image" style="background: url('${service.image}') center/cover no-repeat;"></div>
+        <div class="service-content">
+          <h3>${service.title}</h3>
+          <p>${service.description}</p>
+        </div>
+      `;
+      servicesGrid.appendChild(serviceCard);
+    });
+  }
 
-      if (filter === 'all' || filter === category) {
-        item.style.display = 'block';
-        setTimeout(() => {
-          item.style.opacity = '1';
-        }, 100);
-      } else {
-        item.style.opacity = '0';
-        setTimeout(() => {
+  // Render portfolio filters
+  renderPortfolioFilters() {
+    const filterContainer = document.querySelector('.portfolio-filter');
+    if (!filterContainer) return;
+
+    filterContainer.innerHTML = '';
+
+    this.data.filters.forEach((filter, index) => {
+      const filterBtn = document.createElement('button');
+      filterBtn.className = `filter-btn ${index === 0 ? 'active' : ''}`;
+      filterBtn.setAttribute('data-filter', filter.id);
+      filterBtn.textContent = filter.label;
+      filterContainer.appendChild(filterBtn);
+    });
+
+    // Add event listeners for filters
+    this.attachFilterListeners();
+  }
+
+  // Render portfolio items
+  renderPortfolio() {
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+    if (!portfolioGrid) return;
+
+    portfolioGrid.innerHTML = '';
+
+    this.data.portfolio.forEach(item => {
+      const portfolioItem = document.createElement('div');
+      portfolioItem.className = 'portfolio-item';
+      portfolioItem.setAttribute('data-category', item.category);
+      portfolioItem.innerHTML = `
+        <div class="portfolio-image" style="background: url('${item.image}') center/cover no-repeat;"></div>
+        <div class="portfolio-overlay">
+          <h3>${item.title}</h3>
+          <p>${item.location}</p>
+        </div>
+      `;
+      portfolioGrid.appendChild(portfolioItem);
+    });
+  }
+
+  // Attach filter event listeners
+  attachFilterListeners() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        portfolioItems.forEach(item => {
           item.style.display = 'none';
-        }, 300);
+          item.style.opacity = '0';
+          item.style.transition = 'opacity 0.3s ease';
+        });
+        // Add active class to clicked button
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+
+        // Filter portfolio items
+        portfolioItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || filter === category) {
+            item.style.display = 'block';
+            setTimeout(() => {
+              item.style.opacity = '1';
+            }, 100);
+          } else {
+            item.style.opacity = '0';
+            setTimeout(() => {
+              item.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  }
+
+  // Initialize all dynamic content
+  init() {
+    this.renderServices();
+    this.renderPortfolio();
+    this.renderPortfolioFilters();
+  }
+
+  // Add new service dynamically
+  addService(serviceData) {
+    this.data.services.push(serviceData);
+    this.renderServices();
+  }
+
+  // Add new portfolio item dynamically
+  addPortfolioItem(portfolioData) {
+    this.data.portfolio.push(portfolioData);
+    this.renderPortfolio();
+    // Re-attach listeners since DOM was updated
+    this.attachFilterListeners();
+  }
+
+  // Load data from external JSON file
+  static async loadFromFile(jsonPath) {
+    try {
+      const response = await fetch(jsonPath);
+      const data = await response.json();
+      return new DynamicContent(data);
+    } catch (error) {
+      console.error('Error loading data:', error);
+      return null;
+    }
+  }
+}
+
+// Usage examples:
+
+// 1. Initialize with embedded data
+document.addEventListener('DOMContentLoaded', () => {
+  const dynamicContent = new DynamicContent(servicesData);
+  dynamicContent.init();
+});
+
+// 2. Load from external JSON file
+document.addEventListener('DOMContentLoaded', async () => {
+  const dynamicContent = await DynamicContent.loadFromFile('data/services-data.json');
+  if (dynamicContent) {
+    dynamicContent.init();
+  }
+});
+
+// 3. Add content dynamically
+const addNewService = () => {
+  dynamicContent.addService(newService);
+};
+
+// 4. Lazy loading images
+class LazyImageLoader {
+  constructor() {
+    this.observer = new IntersectionObserver(this.loadImage.bind(this), {
+      rootMargin: '50px'
+    });
+  }
+
+  loadImage(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const src = img.dataset.src;
+        if (src) {
+          img.style.backgroundImage = `url('${src}')`;
+          img.removeAttribute('data-src');
+          this.observer.unobserve(img);
+        }
       }
     });
-  });
-});
+  }
+
+  observe(elements) {
+    elements.forEach(el => this.observer.observe(el));
+  }
+}
+
+// Enhanced version with lazy loading
+class EnhancedDynamicContent extends DynamicContent {
+  constructor(data) {
+    super(data);
+    this.lazyLoader = new LazyImageLoader();
+  }
+
+  renderServices() {
+    const servicesGrid = document.querySelector('.services-grid');
+    if (!servicesGrid) return;
+
+    servicesGrid.innerHTML = '';
+
+    this.data.services.forEach(service => {
+      const serviceCard = document.createElement('div');
+      serviceCard.className = 'service-card';
+      serviceCard.innerHTML = `
+        <div class="service-image" data-src="${service.image}"></div>
+        <div class="service-content">
+          <h3>${service.title}</h3>
+          <p>${service.description}</p>
+        </div>
+      `;
+      servicesGrid.appendChild(serviceCard);
+    });
+
+    // Enable lazy loading
+    const images = servicesGrid.querySelectorAll('.service-image[data-src]');
+    this.lazyLoader.observe(images);
+  }
+
+  renderPortfolio() {
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+    if (!portfolioGrid) return;
+
+    portfolioGrid.innerHTML = '';
+
+    this.data.portfolio.forEach(item => {
+      const portfolioItem = document.createElement('div');
+      portfolioItem.className = 'portfolio-item';
+      portfolioItem.setAttribute('data-category', item.category);
+      portfolioItem.innerHTML = `
+        <div class="portfolio-image" data-src="${item.image}"></div>
+        <div class="portfolio-overlay">
+          <h3>${item.title}</h3>
+          <p>${item.location}</p>
+        </div>
+      `;
+      portfolioGrid.appendChild(portfolioItem);
+    });
+
+    // Enable lazy loading
+    const images = portfolioGrid.querySelectorAll('.portfolio-image[data-src]');
+    this.lazyLoader.observe(images);
+  }
+}
 
 // Testimonial slider
 const testimonials = [
