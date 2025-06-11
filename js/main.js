@@ -260,13 +260,13 @@ document.addEventListener('DOMContentLoaded', () => {
   dynamicContent.init();
 });
 
-// 2. Load from external JSON file
-document.addEventListener('DOMContentLoaded', async () => {
-  const dynamicContent = await DynamicContent.loadFromFile('data/services-data.json');
-  if (dynamicContent) {
-    dynamicContent.init();
-  }
-});
+// // 2. Load from external JSON file
+// document.addEventListener('DOMContentLoaded', async () => {
+//   const dynamicContent = await DynamicContent.loadFromFile('data/services-data.json');
+//   if (dynamicContent) {
+//     dynamicContent.init();
+//   }
+// });
 
 // 3. Add content dynamically
 const addNewService = () => {
