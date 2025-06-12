@@ -513,3 +513,122 @@ document.querySelectorAll('section:not(.hero)').forEach(section => {
 // Run on load and scroll
 window.addEventListener('load', animateOnScroll);
 window.addEventListener('scroll', animateOnScroll);
+
+class PortfolioModal {
+  constructor() {
+    this.currentIndex = 0;
+    this.currentFilter = 'all';
+    this.portfolio = servicesData.portfolio;
+    this.modal = document.getElementById('portfolioModal');
+    this.modalImage = document.getElementById('modalImage');
+    this.modalTitle = document.getElementById('modalTitle');
+    this.modalLocation = document.getElementById('modalLocation');
+    this.prevBtn = document.getElementById('prevBtn');
+    this.nextBtn = document.getElementById('nextBtn');
+    this.closeBtn = document.getElementById('modalClose');
+    this.openers = document.querySelectorAll('.portfolio-item');
+
+    this.init();
+  }
+
+  init() {
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    this.openers.forEach((opener, index) => {
+      opener.addEventListener('click', () => {
+        const category = opener.getAttribute('data-category');
+        this.filteredPortfolio = this.portfolio.filter(item =>
+          this.currentFilter === 'all' || item.category === this.currentFilter
+        );
+        this.openModal(index);
+      }
+      );
+    });
+    this.closeBtn.addEventListener('click', () => this.closeModal());
+    this.prevBtn.addEventListener('click', () => this.previousImage());
+    this.nextBtn.addEventListener('click', () => this.nextImage());
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!this.modal.classList.contains('active')) return;
+
+      switch (e.key) {
+        case 'Escape':
+          this.closeModal();
+          break;
+        case 'ArrowLeft':
+          this.previousImage();
+          break;
+        case 'ArrowRight':
+          this.nextImage();
+          break;
+      }
+    });
+
+    // Prevent scrolling when modal is open
+    this.modal.addEventListener('transitionend', (e) => {
+      if (e.target === this.modal) {
+        if (this.modal.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  }
+
+  openModal(index) {
+    this.currentIndex = index;
+    this.updateModalContent();
+    this.modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal() {
+    this.modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  updateModalContent() {
+    const currentItem = this.filteredPortfolio[this.currentIndex];
+
+    // Add loading state
+    this.modalImage.classList.add('loading');
+
+    // Update image and content
+    this.modalImage.src = currentItem.image;
+    this.modalImage.alt = currentItem.title;
+    this.modalTitle.textContent = currentItem.title;
+    this.modalLocation.textContent = currentItem.location;
+
+    // Remove loading state when image loads
+    this.modalImage.onload = () => {
+      this.modalImage.classList.remove('loading');
+    };
+
+    // Update navigation buttons
+    this.prevBtn.disabled = this.currentIndex === 0;
+    this.nextBtn.disabled = this.currentIndex === this.filteredPortfolio.length - 1;
+  }
+
+  previousImage() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.updateModalContent();
+    }
+  }
+
+  nextImage() {
+    if (this.currentIndex < this.filteredPortfolio.length - 1) {
+      this.currentIndex++;
+      this.updateModalContent();
+    }
+  }
+}
+
+// Initialize the portfolio modal when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new PortfolioModal();
+});
