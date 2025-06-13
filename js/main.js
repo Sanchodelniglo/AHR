@@ -28,13 +28,13 @@ const servicesData = {
       title: 'Clôture Bois',
       description: 'Conception et réalisation de clôtures en bois sur mesure, combinant savoir-faire traditionnel et solutions modernes pour des installations durables et esthétiques.',
       image: 'img/carpenter.webp',
-      category: 'cloture'
+      category: 'fence'
     },
     {
       id: 'terrasses-bois',
       title: 'Terrasses en bois',
       description: 'Création de terrasses uniques adaptées à votre espace extérieur, avec un large choix d\'essences de bois pour un résultat à la fois durable et élégant.',
-      image: 'img/deck.webp',
+      image: 'img/terrasse-piscine.webp',
       category: 'terrasse'
     },
     {
@@ -58,7 +58,7 @@ const servicesData = {
       title: 'Clôture traditionnelle',
       location: 'Saint-Émilion',
       image: 'img/carpenter.webp',
-      category: 'cloture'
+      category: 'fence'
     },
     {
       id: 'terrasse-bordeaux',
@@ -93,7 +93,7 @@ const servicesData = {
       title: 'Rénovation château',
       location: 'Saint-Estèphe',
       image: 'img/carpenter.webp',
-      category: 'cloture'
+      category: 'fence'
     },
     {
       id: 'terrasse-blanquefort',
@@ -101,11 +101,18 @@ const servicesData = {
       location: 'Blanquefort',
       image: 'img/deck.webp',
       category: 'terrasse'
+    },
+    {
+      id: 'terrasse-piscine',
+      title: "Terrasse en bois exotique autour de piscine",
+      location: 'Saint-Médard-en-Jalles',
+      image: 'img/terrasse-piscine.webp',
+      category: 'terrasse'
     }
   ],
   filters: [
     { id: 'all', label: 'Tous' },
-    { id: 'cloture', label: 'Clôtures' },
+    { id: 'fence', label: 'Clôtures' },
     { id: 'terrasse', label: 'Terrasses' },
     { id: 'pergola', label: 'Pergolas' },
     { id: 'extension', label: 'Extensions' }

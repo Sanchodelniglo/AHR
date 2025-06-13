@@ -1039,7 +1039,7 @@ footer {
   }
 
   .hero-bg {
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)), url('img/deck.webp') center/cover no-repeat;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)), url('img/terrasse-piscine.webp') center/cover no-repeat;
   }
 
   .btn-primary {
