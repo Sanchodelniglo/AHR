@@ -27,8 +27,8 @@ const servicesData = {
       id: 'cloture-bois',
       title: 'Clôture Bois',
       description: 'Conception et réalisation de clôtures en bois sur mesure, combinant savoir-faire traditionnel et solutions modernes pour des installations durables et esthétiques.',
-      image: 'img/carpenter.webp',
-      category: 'fence'
+      image: 'img/cloture-volige-saint-jean-d-illac.webp',
+      category: 'cloture'
     },
     {
       id: 'terrasses-bois',
@@ -54,65 +54,72 @@ const servicesData = {
   ],
   portfolio: [
     {
-      id: 'cloture-saint-emilion',
-      title: 'Clôture traditionnelle',
-      location: 'Saint-Émilion',
-      image: 'img/carpenter.webp',
-      category: 'fence'
-    },
-    {
-      id: 'terrasse-bordeaux',
-      title: 'Terrasse en ipé',
-      location: 'Bordeaux Centre',
-      image: 'img/deck.webp',
-      category: 'terrasse'
+      id: 'cloture-saint-jean-d-illac',
+      title: 'Clôture en volige',
+      location: 'Saint-Jean-d\'Illac',
+      image: 'img/cloture-volige-saint-jean-d-illac.webp',
+      category: 'cloture'
     },
     {
       id: 'pergola-arcachon',
-      title: 'Pergola contemporaine',
+      title: 'Pergola en bois',
       location: 'Arcachon',
       image: 'img/pergola.webp',
       category: 'pergola'
     },
     {
-      id: 'extension-pessac',
-      title: 'Extension maison d\'architecte',
-      location: 'Pessac',
+      id: 'extension-saint-jean-d-illac',
+      title: 'Studio extension bois',
+      location: 'Saint-Jean-d\'Illac',
       image: 'img/extension.webp',
       category: 'extension'
     },
     {
+      id: 'cloture-portail',
+      title: 'Clôture et portail en bois',
+      location: 'Lège-Cap-Ferret',
+      image: 'img/cloture-portail.webp',
+      category: 'cloture'
+    },
+    {
       id: 'extension-pessac-2',
       title: 'Extension maison d\'architecte',
-      location: 'Pessac',
+      location: 'Arès',
       image: 'img/extension-2.webp',
       category: 'extension'
     },
     {
-      id: 'cloture-saint-estephe',
-      title: 'Rénovation château',
-      location: 'Saint-Estèphe',
-      image: 'img/carpenter.webp',
-      category: 'fence'
-    },
-    {
-      id: 'terrasse-blanquefort',
-      title: 'Terrasse autour de piscine',
-      location: 'Blanquefort',
-      image: 'img/deck.webp',
+      id: 'terrasse-piscine',
+      title: "Terrasse en bois exotique piscine",
+      location: 'Saint-Médard-en-Jalles',
+      image: 'img/terrasse-piscine.webp',
       category: 'terrasse'
     },
     {
-      id: 'terrasse-piscine',
-      title: "Terrasse en bois exotique autour de piscine",
+      id: 'terrasse-piscine-2',
+      title: "Terrasse et clôture piscine",
       location: 'Saint-Médard-en-Jalles',
-      image: 'img/terrasse-piscine.webp',
+      image: 'img/header.webp',
+      category: 'terrasse'
+    },
+    {
+      id: 'pergola-persienne',
+      title: 'Pergola avec persiennes',
+      location: 'Saint-Médard-en-Jalles',
+      image: 'img/pergola-persienne.webp',
+      category: 'pergola'
+    },
+    {
+      id: 'terrasse-multi-niveaux',
+      title: 'Terrasse multi-niveaux',
+      location: 'Le Haillan',
+      image: 'img/terrasse-multi-niveaux.webp',
       category: 'terrasse'
     }
   ],
   filters: [
     { id: 'all', label: 'Tous' },
-    { id: 'fence', label: 'Clôtures' },
+    { id: 'cloture', label: 'Clôtures' },
     { id: 'terrasse', label: 'Terrasses' },
     { id: 'pergola', label: 'Pergolas' },
     { id: 'extension', label: 'Extensions' }
@@ -369,17 +376,17 @@ const testimonials = [
   {
     content: "Élégance Bois a réalisé notre terrasse en bois exotique, un travail remarquable avec un souci du détail impressionnant. Le résultat dépasse nos attentes et s'intègre parfaitement à notre jardin.",
     author: "Famille Lecomte",
-    location: "Pessac, Gironde"
+    location: "La Teste, Gironde"
   },
   {
     content: "La rénovation de notre cloture était un projet ambitieux, mais l'équipe d'Élégance Bois a relevé le défi avec brio. Leur expertise et leur professionnalisme nous ont convaincus dès le premier contact.",
     author: "Jean-Pierre Brun",
-    location: "Saint-Émilion, Gironde"
+    location: "Saint-Jean d'Illac, Gironde"
   },
   {
     content: "Nous recommandons vivement cette entreprise pour la qualité de leur travail et leur écoute attentive. Notre pergola est devenue le point central de notre jardin et fait l'admiration de tous nos invités.",
     author: "Sophie Lopez",
-    location: "Bordeaux, Gironde"
+    location: "Arcachon, Gironde"
   }
 ];
 
