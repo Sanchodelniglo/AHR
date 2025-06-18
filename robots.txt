@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+
+# Block access to admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/uploads/
+Disallow: /cgi-bin/
+
+# Block access to temporary and cache files
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /*.tmp$
+Disallow: /*.log$
+
+# Block access to configuration files
+Disallow: /*.ini$
+Disallow: /*.conf$
+Disallow: /*.config$
+
+# Allow access to CSS, JS, and images for proper indexing
+Allow: /css/
+Allow: /js/
+Allow: /img/
+Allow: /images/
+Allow: /styles.css
+Allow: /js/main.js
+
+# Common crawl delays (optional)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://elegance-bois.fr/sitemap.xml
