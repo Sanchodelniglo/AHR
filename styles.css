@@ -382,11 +382,11 @@ nav a:hover::after {
   height: 200px;
   background-size: cover;
   background-position: center;
-  transition: transform 0.5s ease;
+  /* transition: transform 0.5s ease; */
 }
 
 .service-image.loaded {
-  animation: fadeIn 0.7s ease;
+  animation: fadeIn 1s ease;
 }
 
 .service-card:hover .service-image {

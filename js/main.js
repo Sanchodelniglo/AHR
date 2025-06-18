@@ -1,9 +1,8 @@
 // Configuration and constants
 const CONFIG = {
-  SCROLL_THRESHOLD: 50,
+  SCROLL_THRESHOLD: -100,
   ANIMATION_DELAY: 100,
   TESTIMONIAL_INTERVAL: 5000,
-  LAZY_LOAD_MARGIN: '50px',
   FORM_SUBMIT_DELAY: 4000,
   FORMSPREE_URL: 'https://formspree.io/f/xrbkbkeb'
 };
