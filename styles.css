@@ -316,8 +316,8 @@ nav a:hover::after {
   position: absolute;
   bottom: 2rem;
   left: 50%;
-  transform: translateX(-50%);
-  animation: bounce 2s infinite;
+  transform: translateX(-25%);
+  animation: bounce 1s infinite;
 }
 
 .scroll-indicator svg {
@@ -386,7 +386,7 @@ nav a:hover::after {
 }
 
 .service-image.loaded {
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.7s ease;
 }
 
 .service-card:hover .service-image {

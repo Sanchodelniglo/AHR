@@ -650,8 +650,8 @@ class ScrollAnimationHandler {
     this.sections.forEach(section => {
       section.style.cssText = `
         opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
+        transform: translateY(25px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
       `;
     });
   }
@@ -667,7 +667,7 @@ class ScrollAnimationHandler {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '-50px' }
+      { threshold: 0.1, rootMargin: '-25px' }
     );
 
     this.sections.forEach(section => observer.observe(section));
