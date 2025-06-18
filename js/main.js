@@ -1,26 +1,13 @@
+// Configuration and constants
+const CONFIG = {
+  SCROLL_THRESHOLD: -100,
+  ANIMATION_DELAY: 100,
+  TESTIMONIAL_INTERVAL: 5000,
+  FORM_SUBMIT_DELAY: 4000,
+  FORMSPREE_URL: 'https://formspree.io/f/xrbkbkeb'
+};
 
-// Menu mobile
-const menuToggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('nav');
-
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  nav.classList.toggle('active');
-  document.body.classList.toggle('no-scroll');
-});
-
-// Header scroll effect
-const header = document.querySelector('header');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
-
-// services-data.json
+// Services data
 const servicesData = {
   services: [
     {
@@ -126,253 +113,8 @@ const servicesData = {
   ]
 };
 
-// Dynamic rendering functions
-class DynamicContent {
-  constructor(data) {
-    this.data = data;
-  }
-
-  // Render services section
-  renderServices() {
-    const servicesGrid = document.querySelector('.services-grid');
-    if (!servicesGrid) return;
-
-    servicesGrid.innerHTML = '';
-
-    this.data.services.forEach(service => {
-      const serviceCard = document.createElement('div');
-      serviceCard.className = 'service-card';
-      serviceCard.innerHTML = `
-        <div class="service-image" style="background: url('${service.image}') center/cover no-repeat;"></div>
-        <div class="service-content">
-          <h3>${service.title}</h3>
-          <p>${service.description}</p>
-        </div>
-      `;
-      servicesGrid.appendChild(serviceCard);
-    });
-  }
-
-  // Render portfolio filters
-  renderPortfolioFilters() {
-    const filterContainer = document.querySelector('.portfolio-filter');
-    if (!filterContainer) return;
-
-    filterContainer.innerHTML = '';
-
-    this.data.filters.forEach((filter, index) => {
-      const filterBtn = document.createElement('button');
-      filterBtn.className = `filter-btn ${index === 0 ? 'active' : ''}`;
-      filterBtn.setAttribute('data-filter', filter.id);
-      filterBtn.textContent = filter.label;
-      filterContainer.appendChild(filterBtn);
-    });
-
-    // Add event listeners for filters
-    this.attachFilterListeners();
-  }
-
-  // Render portfolio items
-  renderPortfolio() {
-    const portfolioGrid = document.querySelector('.portfolio-grid');
-    if (!portfolioGrid) return;
-
-    portfolioGrid.innerHTML = '';
-
-    this.data.portfolio.forEach(item => {
-      const portfolioItem = document.createElement('div');
-      portfolioItem.className = 'portfolio-item';
-      portfolioItem.setAttribute('data-category', item.category);
-      portfolioItem.innerHTML = `
-        <div class="portfolio-image" style="background: url('${item.image}') center/cover no-repeat;"></div>
-        <div class="portfolio-overlay">
-          <h3>${item.title}</h3>
-          <p>${item.location}</p>
-        </div>
-      `;
-      portfolioGrid.appendChild(portfolioItem);
-    });
-  }
-
-  // Attach filter event listeners
-  attachFilterListeners() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        portfolioItems.forEach(item => {
-          item.style.display = 'none';
-          item.style.opacity = '0';
-          item.style.transition = 'opacity 0.3s ease';
-        });
-        // Add active class to clicked button
-        button.classList.add('active');
-
-        const filter = button.getAttribute('data-filter');
-
-        // Filter portfolio items
-        portfolioItems.forEach(item => {
-          const category = item.getAttribute('data-category');
-          if (filter === 'all' || filter === category) {
-            item.style.display = 'block';
-            setTimeout(() => {
-              item.style.opacity = '1';
-            }, 100);
-          } else {
-            item.style.opacity = '0';
-            setTimeout(() => {
-              item.style.display = 'none';
-            }, 300);
-          }
-        });
-      });
-    });
-  }
-
-  // Initialize all dynamic content
-  init() {
-    this.renderServices();
-    this.renderPortfolio();
-    this.renderPortfolioFilters();
-  }
-
-  // Add new service dynamically
-  addService(serviceData) {
-    this.data.services.push(serviceData);
-    this.renderServices();
-  }
-
-  // Add new portfolio item dynamically
-  addPortfolioItem(portfolioData) {
-    this.data.portfolio.push(portfolioData);
-    this.renderPortfolio();
-    // Re-attach listeners since DOM was updated
-    this.attachFilterListeners();
-  }
-
-  // Load data from external JSON file
-  static async loadFromFile(jsonPath) {
-    try {
-      const response = await fetch(jsonPath);
-      const data = await response.json();
-      return new DynamicContent(data);
-    } catch (error) {
-      console.error('Error loading data:', error);
-      return null;
-    }
-  }
-}
-
-// Usage examples:
-
-// 1. Initialize with embedded data
-document.addEventListener('DOMContentLoaded', () => {
-  const dynamicContent = new DynamicContent(servicesData);
-  dynamicContent.init();
-});
-
-// // 2. Load from external JSON file
-// document.addEventListener('DOMContentLoaded', async () => {
-//   const dynamicContent = await DynamicContent.loadFromFile('data/services-data.json');
-//   if (dynamicContent) {
-//     dynamicContent.init();
-//   }
-// });
-
-// 3. Add content dynamically
-const addNewService = () => {
-  dynamicContent.addService(newService);
-};
-
-// 4. Lazy loading images
-class LazyImageLoader {
-  constructor() {
-    this.observer = new IntersectionObserver(this.loadImage.bind(this), {
-      rootMargin: '50px'
-    });
-  }
-
-  loadImage(entries) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        const src = img.dataset.src;
-        if (src) {
-          img.style.backgroundImage = `url('${src}')`;
-          img.removeAttribute('data-src');
-          this.observer.unobserve(img);
-        }
-      }
-    });
-  }
-
-  observe(elements) {
-    elements.forEach(el => this.observer.observe(el));
-  }
-}
-
-// Enhanced version with lazy loading
-class EnhancedDynamicContent extends DynamicContent {
-  constructor(data) {
-    super(data);
-    this.lazyLoader = new LazyImageLoader();
-  }
-
-  renderServices() {
-    const servicesGrid = document.querySelector('.services-grid');
-    if (!servicesGrid) return;
-
-    servicesGrid.innerHTML = '';
-
-    this.data.services.forEach(service => {
-      const serviceCard = document.createElement('div');
-      serviceCard.className = 'service-card';
-      serviceCard.innerHTML = `
-        <div class="service-image" data-src="${service.image}"></div>
-        <div class="service-content">
-          <h3>${service.title}</h3>
-          <p>${service.description}</p>
-        </div>
-      `;
-      servicesGrid.appendChild(serviceCard);
-    });
-
-    // Enable lazy loading
-    const images = servicesGrid.querySelectorAll('.service-image[data-src]');
-    this.lazyLoader.observe(images);
-  }
-
-  renderPortfolio() {
-    const portfolioGrid = document.querySelector('.portfolio-grid');
-    if (!portfolioGrid) return;
-
-    portfolioGrid.innerHTML = '';
-
-    this.data.portfolio.forEach(item => {
-      const portfolioItem = document.createElement('div');
-      portfolioItem.className = 'portfolio-item';
-      portfolioItem.setAttribute('data-category', item.category);
-      portfolioItem.innerHTML = `
-        <div class="portfolio-image" data-src="${item.image}"></div>
-        <div class="portfolio-overlay">
-          <h3>${item.title}</h3>
-          <p>${item.location}</p>
-        </div>
-      `;
-      portfolioGrid.appendChild(portfolioItem);
-    });
-
-    // Enable lazy loading
-    const images = portfolioGrid.querySelectorAll('.portfolio-image[data-src]');
-    this.lazyLoader.observe(images);
-  }
-}
-
-// Testimonial slider
-const testimonials = [
+// Testimonials data
+const testimonialsData = [
   {
     content: "Élégance Bois a réalisé notre terrasse en bois exotique, un travail remarquable avec un souci du détail impressionnant. Le résultat dépasse nos attentes et s'intègre parfaitement à notre jardin.",
     author: "Famille Lecomte",
@@ -390,149 +132,283 @@ const testimonials = [
   }
 ];
 
-const testimonialContainer = document.querySelector('.testimonial');
-const sliderDots = document.querySelectorAll('.slider-dot');
-let currentTestimonial = 0;
-
-// Function to update testimonial
-function updateTestimonial(index) {
-  const testimonial = testimonials[index];
-  testimonialContainer.innerHTML = `
-                <div class="testimonial-content">
-                    <p>${testimonial.content}</p>
-                </div>
-                <div class="testimonial-author">${testimonial.author}</div>
-                <div class="testimonial-location">${testimonial.location}</div>
-            `;
-
-  // Update active dot
-  sliderDots.forEach((dot, i) => {
-    dot.classList.toggle('active', i === index);
-  });
-}
-
-// Set up click events for dots
-sliderDots.forEach((dot, i) => {
-  dot.addEventListener('click', () => {
-    currentTestimonial = i;
-    updateTestimonial(i);
-  });
-});
-
-// Auto rotate testimonials
-setInterval(() => {
-  currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-  updateTestimonial(currentTestimonial);
-}, 5000);
-
-// Form submission
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const service = document.getElementById('service').value.trim();
-
-  if (name && email && phone && message && service) {
-    const formData = new FormData(contactForm);
-    const button = contactForm.querySelector('button[type="submit"]');
-    button.innerHTML = '<span class="loader"></span>';
-
-    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-    // Usage inside an async function:
-    await sleep(4000); // pauses execution for 4 seconds
-    window.fetch = async () => {
-      return {
-        ok: true,
-        json: async () => ({ error: "Simulated failure" })
+// Utility functions
+const utils = {
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
       };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
     };
+  },
 
-    try {
-      const response = await fetch('https://formspree.io/f/xrbkbkeb', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        contactForm.reset();
-        contactForm.innerHTML = "✅ Merci pour votre message ! Nous vous contacterons très rapidement.";
-      } else {
-        contactForm.innerHTML = '❌ Une erreur est survenue lors de l’envoi. Veuillez réessayer plus tard.';
+  throttle(func, limit) {
+    let inThrottle;
+    return function (...args) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
       }
-    } catch (error) {
-      contactForm.innerHTML = '❌ Une erreur réseau est survenue. Veuillez vérifier votre connexion.';
-    }
-  } else {
-    alert('Veuillez remplir tous les champs obligatoires.');
+    };
+  },
+
+  createElement(tag, className, innerHTML) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (innerHTML) element.innerHTML = innerHTML;
+    return element;
+  },
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    const href = this.getAttribute('href');
-
-    if (href === '#') return;
-
-    const targetElement = document.querySelector(href);
-
-    if (targetElement) {
-      // Close mobile menu if open
-      if (nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        document.body.classList.remove('no-scroll');
-      }
-
-      window.scrollTo({
-        top: targetElement.offsetTop - header.offsetHeight,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-
-// Animation on scroll
-const animateOnScroll = () => {
-  const sections = document.querySelectorAll('section:not(.hero)');
-
-  sections.forEach(section => {
-    const sectionTop = section.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if (sectionTop < windowHeight * 0.8) {
-      section.style.opacity = '1';
-      section.style.transform = 'translateY(0)';
-    }
-  });
 };
 
-// Apply initial styles for animation
-document.querySelectorAll('section:not(.hero)').forEach(section => {
-  section.style.opacity = '0';
-  section.style.transform = 'translateY(50px)';
-  section.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-});
-
-// Run on load and scroll
-window.addEventListener('load', animateOnScroll);
-window.addEventListener('scroll', animateOnScroll);
-
-class PortfolioModal {
+// DOM Cache
+class DOMCache {
   constructor() {
-    this.currentIndex = 0;
+    this.cache = new Map();
+  }
+
+  get(selector) {
+    if (!this.cache.has(selector)) {
+      this.cache.set(selector, document.querySelector(selector));
+    }
+    return this.cache.get(selector);
+  }
+
+  getAll(selector) {
+    if (!this.cache.has(selector)) {
+      this.cache.set(selector, document.querySelectorAll(selector));
+    }
+    return this.cache.get(selector);
+  }
+
+  clear() {
+    this.cache.clear();
+  }
+}
+
+const dom = new DOMCache();
+
+// Navigation Handler
+class NavigationHandler {
+  constructor() {
+    this.menuToggle = dom.get('.menu-toggle');
+    this.nav = dom.get('nav');
+    this.header = dom.get('header');
+    this.body = document.body;
+    this.init();
+  }
+
+  init() {
+    this.menuToggle?.addEventListener('click', () => this.toggleMenu());
+    window.addEventListener('scroll', utils.throttle(() => this.handleScroll(), 100));
+    this.setupSmoothScrolling();
+  }
+
+  toggleMenu() {
+    this.menuToggle.classList.toggle('active');
+    this.nav.classList.toggle('active');
+    this.body.classList.toggle('no-scroll');
+  }
+
+  closeMenu() {
+    this.menuToggle.classList.remove('active');
+    this.nav.classList.remove('active');
+    this.body.classList.remove('no-scroll');
+  }
+
+  handleScroll() {
+    const scrolled = window.scrollY > CONFIG.SCROLL_THRESHOLD;
+    this.header.classList.toggle('scrolled', scrolled);
+  }
+
+  setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const href = anchor.getAttribute('href');
+        if (href === '#') return;
+
+        const target = document.querySelector(href);
+        if (target) {
+          this.closeMenu();
+          const offsetTop = target.offsetTop - this.header.offsetHeight;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }
+}
+
+// Lazy Image Loader
+class LazyImageLoader {
+  constructor() {
+    this.observer = new IntersectionObserver(
+      entries => this.handleIntersection(entries),
+      { rootMargin: CONFIG.LAZY_LOAD_MARGIN }
+    );
+  }
+
+  handleIntersection(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const src = img.dataset.src;
+        if (src) {
+          img.style.backgroundImage = `url('${src}')`;
+          img.classList.add('loaded');
+          delete img.dataset.src;
+          this.observer.unobserve(img);
+        }
+      }
+    });
+  }
+
+  observe(elements) {
+    elements.forEach(el => this.observer.observe(el));
+  }
+}
+
+// Dynamic Content Manager
+class DynamicContentManager {
+  constructor(data) {
+    this.data = data;
+    this.lazyLoader = new LazyImageLoader();
     this.currentFilter = 'all';
-    this.portfolio = servicesData.portfolio;
+  }
+
+  init() {
+    this.renderServices();
+    this.renderPortfolio();
+    this.renderPortfolioFilters();
+  }
+
+  renderServices() {
+    const grid = dom.get('.services-grid');
+    if (!grid) return;
+
+    const fragment = document.createDocumentFragment();
+
+    this.data.services.forEach(service => {
+      const card = utils.createElement('div', 'service-card');
+      card.innerHTML = `
+        <div class="service-image" data-src="${service.image}"></div>
+        <div class="service-content">
+          <h3>${service.title}</h3>
+          <p>${service.description}</p>
+        </div>
+      `;
+      fragment.appendChild(card);
+    });
+
+    grid.innerHTML = '';
+    grid.appendChild(fragment);
+
+    const images = grid.querySelectorAll('.service-image[data-src]');
+    this.lazyLoader.observe(images);
+  }
+
+  renderPortfolioFilters() {
+    const container = dom.get('.portfolio-filter');
+    if (!container) return;
+
+    const fragment = document.createDocumentFragment();
+
+    this.data.filters.forEach((filter, index) => {
+      const btn = utils.createElement('button', `filter-btn ${index === 0 ? 'active' : ''}`);
+      btn.setAttribute('data-filter', filter.id);
+      btn.textContent = filter.label;
+      btn.addEventListener('click', () => this.handleFilterClick(filter.id));
+      fragment.appendChild(btn);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(fragment);
+  }
+
+  renderPortfolio() {
+    const grid = dom.get('.portfolio-grid');
+    if (!grid) return;
+
+    const fragment = document.createDocumentFragment();
+
+    this.data.portfolio.forEach(item => {
+      const portfolioItem = utils.createElement('div', 'portfolio-item');
+      portfolioItem.setAttribute('data-category', item.category);
+      portfolioItem.innerHTML = `
+        <div class="portfolio-image" data-src="${item.image}"></div>
+        <div class="portfolio-overlay">
+          <h3>${item.title}</h3>
+          <p>${item.location}</p>
+        </div>
+      `;
+      fragment.appendChild(portfolioItem);
+    });
+
+    grid.innerHTML = '';
+    grid.appendChild(fragment);
+
+    const images = grid.querySelectorAll('.portfolio-image[data-src]');
+    this.lazyLoader.observe(images);
+  }
+
+  handleFilterClick(filterId) {
+    this.currentFilter = filterId;
+
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-filter') === filterId);
+    });
+
+    const items = document.querySelectorAll('.portfolio-item');
+
+    // First, fade out items that need to be hidden
+    items.forEach(item => {
+      const category = item.getAttribute('data-category');
+      if (filterId !== 'all' && filterId !== category) {
+        item.style.opacity = '0';
+        setTimeout(() => {
+          item.style.display = 'none';
+        }, 300); // Wait for fade transition
+      }
+    });
+
+    // Then show and fade in desired items
+    setTimeout(() => {
+      items.forEach(item => {
+        const category = item.getAttribute('data-category');
+        if (filterId === 'all' || filterId === category) {
+          item.style.display = 'block';
+          setTimeout(() => {
+            item.style.opacity = '1';
+          }, 50); // Small delay for smooth appearance
+        }
+      });
+    }, 300);
+  }
+}
+
+// Portfolio Modal
+class PortfolioModal {
+  constructor(data) {
+    this.portfolio = data.portfolio;
+    this.currentIndex = 0;
+    this.filteredPortfolio = [...this.portfolio];
+    this.initElements();
+    this.bindEvents();
+  }
+
+  initElements() {
     this.modal = document.getElementById('portfolioModal');
     this.modalImage = document.getElementById('modalImage');
     this.modalTitle = document.getElementById('modalTitle');
@@ -540,60 +416,54 @@ class PortfolioModal {
     this.prevBtn = document.getElementById('prevBtn');
     this.nextBtn = document.getElementById('nextBtn');
     this.closeBtn = document.getElementById('modalClose');
-    this.openers = document.querySelectorAll('.portfolio-item');
-
-    this.init();
-  }
-
-  init() {
-    this.bindEvents();
   }
 
   bindEvents() {
-    this.openers.forEach((opener, index) => {
-      opener.addEventListener('click', () => {
-        const category = opener.getAttribute('data-category');
-        this.filteredPortfolio = this.portfolio.filter(item =>
-          this.currentFilter === 'all' || item.category === this.currentFilter
-        );
-        this.openModal(index);
+    // Portfolio item clicks
+    document.addEventListener('click', e => {
+      const item = e.target.closest('.portfolio-item');
+      if (item) {
+        const items = Array.from(document.querySelectorAll('.portfolio-item:not([style*="display: none"])'));
+        const index = items.indexOf(item);
+        if (index !== -1) {
+          this.openModal(index);
+        }
       }
-      );
     });
-    this.closeBtn.addEventListener('click', () => this.closeModal());
-    this.prevBtn.addEventListener('click', () => this.previousImage());
-    this.nextBtn.addEventListener('click', () => this.nextImage());
+
+    // Modal controls
+    this.closeBtn?.addEventListener('click', () => this.closeModal());
+    this.prevBtn?.addEventListener('click', () => this.navigate(-1));
+    this.nextBtn?.addEventListener('click', () => this.navigate(1));
 
     // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (!this.modal.classList.contains('active')) return;
 
-      switch (e.key) {
-        case 'Escape':
-          this.closeModal();
-          break;
-        case 'ArrowLeft':
-          this.previousImage();
-          break;
-        case 'ArrowRight':
-          this.nextImage();
-          break;
-      }
+      const actions = {
+        'Escape': () => this.closeModal(),
+        'ArrowLeft': () => this.navigate(-1),
+        'ArrowRight': () => this.navigate(1)
+      };
+
+      actions[e.key]?.();
     });
 
-    // Prevent scrolling when modal is open
-    this.modal.addEventListener('transitionend', (e) => {
-      if (e.target === this.modal) {
-        if (this.modal.classList.contains('active')) {
-          document.body.style.overflow = 'hidden';
-        } else {
-          document.body.style.overflow = '';
-        }
+    // Backdrop click
+    this.modal?.addEventListener('click', e => {
+      if (e.target.classList.contains('modal-backdrop')) {
+        this.closeModal();
       }
     });
   }
 
   openModal(index) {
+    // Update filtered portfolio based on current filter
+    const currentFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+    this.filteredPortfolio = currentFilter === 'all'
+      ? [...this.portfolio]
+      : this.portfolio.filter(item => item.category === currentFilter);
+
     this.currentIndex = index;
     this.updateModalContent();
     this.modal.classList.add('active');
@@ -605,44 +475,249 @@ class PortfolioModal {
     document.body.style.overflow = '';
   }
 
-  updateModalContent() {
-    const currentItem = this.filteredPortfolio[this.currentIndex];
+  navigate(direction) {
+    const newIndex = this.currentIndex + direction;
+    if (newIndex >= 0 && newIndex < this.filteredPortfolio.length) {
+      this.currentIndex = newIndex;
+      this.updateModalContent();
+    }
+  }
 
-    // Add loading state
+  updateModalContent() {
+    const item = this.filteredPortfolio[this.currentIndex];
+    if (!item) return;
+
     this.modalImage.classList.add('loading');
 
-    // Update image and content
-    this.modalImage.src = currentItem.image;
-    this.modalImage.alt = currentItem.title;
-    this.modalTitle.textContent = currentItem.title;
-    this.modalLocation.textContent = currentItem.location;
-
-    // Remove loading state when image loads
-    this.modalImage.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      this.modalImage.src = img.src;
       this.modalImage.classList.remove('loading');
     };
+    img.src = item.image;
 
-    // Update navigation buttons
+    this.modalTitle.textContent = item.title;
+    this.modalLocation.textContent = item.location;
+
     this.prevBtn.disabled = this.currentIndex === 0;
     this.nextBtn.disabled = this.currentIndex === this.filteredPortfolio.length - 1;
   }
+}
 
-  previousImage() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.updateModalContent();
+// Testimonial Slider
+class TestimonialSlider {
+  constructor(testimonials) {
+    this.testimonials = testimonials;
+    this.currentIndex = 0;
+    this.container = dom.get('.testimonial');
+    this.dots = document.querySelectorAll('.slider-dot');
+    this.interval = null;
+    this.init();
+  }
+
+  init() {
+    this.setupDots();
+    this.startAutoRotate();
+    this.updateTestimonial(0);
+  }
+
+  setupDots() {
+    this.dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        this.stopAutoRotate();
+        this.updateTestimonial(index);
+        this.startAutoRotate();
+      });
+    });
+  }
+
+  updateTestimonial(index) {
+    this.currentIndex = index;
+    const testimonial = this.testimonials[index];
+
+    if (this.container && testimonial) {
+      this.container.innerHTML = `
+        <div class="testimonial-content">
+          <p>${testimonial.content}</p>
+        </div>
+        <div class="testimonial-author">${testimonial.author}</div>
+        <div class="testimonial-location">${testimonial.location}</div>
+      `;
+
+      this.dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
     }
   }
 
-  nextImage() {
-    if (this.currentIndex < this.filteredPortfolio.length - 1) {
-      this.currentIndex++;
-      this.updateModalContent();
-    }
+  startAutoRotate() {
+    this.interval = setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+      this.updateTestimonial(this.currentIndex);
+    }, CONFIG.TESTIMONIAL_INTERVAL);
+  }
+
+  stopAutoRotate() {
+    clearInterval(this.interval);
   }
 }
 
-// Initialize the portfolio modal when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  new PortfolioModal();
-});
+// Form Handler
+class FormHandler {
+  constructor() {
+    this.form = document.getElementById('contactForm');
+    this.init();
+  }
+
+  init() {
+    this.form?.addEventListener('submit', e => this.handleSubmit(e));
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this.form);
+    const button = this.form.querySelector('button[type="submit"]');
+    const originalButtonHTML = button.innerHTML;
+
+    // Validate form
+    const requiredFields = ['name', 'email', 'phone', 'message', 'service'];
+    const isValid = requiredFields.every(field =>
+      formData.get(field)?.toString().trim()
+    );
+
+    if (!isValid) {
+      alert('Veuillez remplir tous les champs obligatoires.');
+      return;
+    }
+
+    // Show loading state
+    button.innerHTML = '<span class="loader"></span>';
+    button.disabled = true;
+
+    try {
+      const response = await fetch(CONFIG.FORMSPREE_URL, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        this.showSuccess();
+      } else {
+        this.showError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.');
+      }
+    } catch (error) {
+      this.showError('Une erreur réseau est survenue. Veuillez vérifier votre connexion.');
+    } finally {
+      button.innerHTML = originalButtonHTML;
+      button.disabled = false;
+    }
+  }
+
+  showSuccess() {
+    this.form.reset();
+    this.form.innerHTML = `
+      <div class="form-success">
+        ✅ Merci pour votre message ! Nous vous contacterons très rapidement.
+      </div>
+    `;
+  }
+
+  showError(message) {
+    const errorDiv = utils.createElement('div', 'form-error', `❌ ${message}`);
+    this.form.insertBefore(errorDiv, this.form.firstChild);
+    setTimeout(() => errorDiv.remove(), 5000);
+  }
+}
+
+// Scroll Animation Handler
+class ScrollAnimationHandler {
+  constructor() {
+    this.sections = document.querySelectorAll('section:not(.hero)');
+    this.init();
+  }
+
+  init() {
+    this.setupInitialStyles();
+    this.observeSections();
+  }
+
+  setupInitialStyles() {
+    this.sections.forEach(section => {
+      section.style.cssText = `
+        opacity: 0;
+        transform: translateY(25px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      `;
+    });
+  }
+
+  observeSections() {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '-25px' }
+    );
+
+    this.sections.forEach(section => observer.observe(section));
+  }
+}
+
+// Initialize Application
+class App {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => this.setup());
+    } else {
+      this.setup();
+    }
+  }
+
+  setup() {
+    // Initialize all components
+    this.navigation = new NavigationHandler();
+    this.contentManager = new DynamicContentManager(servicesData);
+    this.contentManager.init();
+    this.portfolioModal = new PortfolioModal(servicesData);
+    this.testimonialSlider = new TestimonialSlider(testimonialsData);
+    this.formHandler = new FormHandler();
+    this.scrollAnimations = new ScrollAnimationHandler();
+
+    // Performance optimizations
+    this.optimizePerformance();
+  }
+
+  optimizePerformance() {
+    // Preload critical images
+    const criticalImages = ['img/header.webp', 'img/logo-elegance-bois.webp'];
+    criticalImages.forEach(src => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      document.head.appendChild(link);
+    });
+
+    // Enable passive event listeners for scroll performance
+    document.addEventListener('touchstart', () => { }, { passive: true });
+    document.addEventListener('wheel', () => { }, { passive: true });
+  }
+}
+
+// Start the application
+const app = new App();
